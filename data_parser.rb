@@ -31,7 +31,7 @@ end
 
 
 fry_money = fry.map {|destination| destination["Money"].to_i}.reduce(:+)
-fry << fry_money
+
 
 
 amy_money = amy.map {|destination| destination["Money"].to_i}.reduce(:+)
