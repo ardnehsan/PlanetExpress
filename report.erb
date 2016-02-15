@@ -55,26 +55,53 @@
         <%end%>
       </tbody>
     </table>
-
-
     <table>
       <thead>
         <tr>
           <th>Name</th>
-          <th>Number of trips</th>
+          <th>Number of Trips</th>
           <th>Bonus</th>
+
         </tr>
       </thead>
       <tbody>
         <tr>
-            <% pilot.each do |stuff| %><% trips.each do |runs| %><% bonus.each do |tips| %>
-              <td><%=stuff%></td>
-              <td><%=runs%></td>
-              <td><%=tips%></td>
-      </tr>
-    <%end%><%end%><%end%>
+          <td>Fry</td>
+
+          <td><%= fry.count %></td>
+
+          <td><%= frybon %></td>
+
+        </tr>
+        <tr>
+          <td>Amy</td>
+
+          <td><%= amy.count %></td>
+
+          <td><%= amybon %></td>
+
+        </tr>
+        <tr>
+          <td>Bender</td>
+
+          <td><%= bender.count %></td>
+
+          <td><%= benbon %></td>
+
+        </tr>
+        <tr>
+          <td>Leela</td>
+
+          <td><%= leela.count %></td>
+
+          <td><%= leebon %></td>
+
+        </tr>
       </tbody>
     </table>
+
+
+
     <p><img src="/Users/jaifowsar/desktop/theironyard/Lab2/FuturamaGoat.gif"> </p>
   </body>
 </html>

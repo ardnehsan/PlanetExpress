@@ -1,3 +1,4 @@
+
 require 'erb'
 require 'csv'
 
@@ -22,75 +23,43 @@ logs.each do |shipment|
     bender << shipment
   else
     leela << shipment
-    leelatrip = leela.count
+
   end
 
 end
 
-trips = []
 
-  frytrip=fry.length
-  trips << frytrip
-
-  amytrip=amy.length
-  trips << amytrip
-
-  bendertrip=bender.length
-  trips << bendertrip
-
-  leelatrip=leela.length
-  trips << leelatrip
-
-pilot = []
-pilot << 'Fry'
-pilot << 'Amy'
-pilot << 'Bender'
-pilot << 'Leila'
-
-puts
-
-quantity = []
-quantity = logs.map {|ship| ship["Shipment"]}
-p quantity
-
-puts
 
 fry_money = fry.map {|destination| destination["Money"].to_i}.reduce(:+)
-   p fry_money
-puts
+fry << fry_money
+
 
 amy_money = amy.map {|destination| destination["Money"].to_i}.reduce(:+)
-   p amy_money
-puts
+
 
 bender_money = bender.map {|destination| destination["Money"].to_i}.reduce(:+)
-   p bender_money
-puts
 
 leela_money = leela.map {|destination| destination["Money"].to_i}.reduce(:+)
-   p leela_money
-puts
+
 
 total_money = fry_money + amy_money + bender_money + leela_money
   p total_money
 
 puts
 
-bonus = []
 
   frybon = fry_money * 0.1
-  bonus << frybon
+
 
   amybon = amy_money * 0.1
-  bonus << amybon
+
 
   benbon = bender_money * 0.1
-  bonus << benbon
+
 
   leebon = leela_money * 0.1
-  bonus << leebon
 
-p bonus
+
 
 html = File.read("report.erb")
 # replace values
