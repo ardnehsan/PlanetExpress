@@ -1,47 +1,103 @@
-require 'csv'
 require 'erb'
+require 'csv'
 
+
+logs = []
 
 CSV.foreach("planet_express_logs.csv", headers: true) do |row|
     logs << row.to_hash
 end
 
-print Destination
-Earth = []
-Mars = []
-Uranos = []
-Every = []
+fry=[]
+bender=[]
+amy=[]
+leela=[]
 
-# logs.each do |log|
-#   if logs["Earth"] == "Fry"
-#   elsif logs["Planet"] == "Amy"
-#   elsif logs["Planet"] == "Bender"
-#   elsif logs["Planet"] == "Leela"
+logs.each do |shipment|
+  if shipment["Destination"] == "Earth"
+    fry << shipment
+  elsif shipment["Destination"] == "Mars"
+    amy << shipment
+  elsif shipment["Destination"] == "Uranus"
+    bender << shipment
+  else
+    leela << shipment
+    leelatrip = leela.count
+  end
 
+end
 
-html_string = File.read("report.erb")
-compiled_html = ERB.new(html_string).result(binding)
-File.open("./index-output.html", "wb") {|file|
+trips = []
+
+  frytrip=fry.length
+  trips << frytrip
+
+  amytrip=amy.length
+  trips << amytrip
+
+  bendertrip=bender.length
+  trips << bendertrip
+
+  leelatrip=leela.length
+  trips << leelatrip
+
+pilot = []
+pilot << 'Fry'
+pilot << 'Amy'
+pilot << 'Bender'
+pilot << 'Leila'
+
+puts
+
+quantity = []
+quantity = logs.map {|ship| ship["Shipment"]}
+p quantity
+
+puts
+
+fry_money = fry.map {|destination| destination["Money"].to_i}.reduce(:+)
+   p fry_money
+puts
+
+amy_money = amy.map {|destination| destination["Money"].to_i}.reduce(:+)
+   p amy_money
+puts
+
+bender_money = bender.map {|destination| destination["Money"].to_i}.reduce(:+)
+   p bender_money
+puts
+
+leela_money = leela.map {|destination| destination["Money"].to_i}.reduce(:+)
+   p leela_money
+puts
+
+total_money = fry_money + amy_money + bender_money + leela_money
+  p total_money
+
+puts
+
+bonus = []
+
+  frybon = fry_money * 0.1
+  bonus << frybon
+
+  amybon = amy_money * 0.1
+  bonus << amybon
+
+  benbon = bender_money * 0.1
+  bonus << benbon
+
+  leebon = leela_money * 0.1
+  bonus << leebon
+
+p bonus
+
+html = File.read("report.erb")
+# replace values
+compiled_html = ERB.new(html).result(binding)
+
+#writes to HTMl
+File.open("./index-output.html", "wb") do |file|
     file.write(compiled_html)
     file.close()
-}
-
-
-#HOW MUCH MONEY WAS MADE THIS WEEK
-#HOW MUCH DID EACH EMPLOYEE GET AS A BONUS
-#HOW MANY TRIPS DID EACH EMPLOYEE PILOT
-
-# FRY - EARTH
-# AMY - MARS
-# BENDER - URANOS
-# LEELA - EVERYWHERE
-
-# BONUS EQUALS 10% OF THE MONEY FROM TRIPS
-
-# We need sections on the HTML with:
-#
-# h1 with the total money we made this week
-# List of all Shipments (create a table with the shipments listed)
-# List of all employees and their number of trips and bonus
-# Pie chart of the Money each employee delivered
-# A gif, preferably related to Fry, Amy, Bender, and/or Leela
+  end
